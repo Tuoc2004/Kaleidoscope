@@ -39,6 +39,12 @@ export const UserProgress = ({ activeCourse, hearts, points, hasActiveSubcriptio
                     {hasActiveSubcription ? <InfinityIcon className="h-4 w-4 stroke-[3]" /> : hearts } 
                 </Button>
             </Link>
+            <Link href="/shop">
+                <Button variant="ghost" className="text-rose-500">
+                    <Image src="streak.svg" height={22} width={22} alt="Streak" className="mr-2"/>
+                    {hasActiveSubcription ? <InfinityIcon className="h-4 w-4 stroke-[3]" /> : hearts } 
+                </Button>
+            </Link>
         </div>
     )
 }

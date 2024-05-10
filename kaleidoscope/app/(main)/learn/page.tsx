@@ -2,6 +2,9 @@ import { FeedWrapper } from "@/components/feed-wrapper";
 import { Header } from "./header";
 import { StickyWrapper } from "@/components/sticky_wrapper";
 import { UserProgress } from "@/components/user_progress";
+import { Promo } from "@/components/promo";
+import { Quests } from "@/components/quest";
+import Chatbot from "@/components/chatbot";
 import { Unit } from "./unit"
 import { redirect } from "next/navigation";
 import { getCourseProgress, getLessonPercentage, getUnits, getUserProgress } from "@/db/queries";
@@ -28,6 +31,8 @@ const LearnPage = async () => {
                     points={userProgress.points}
                     hasActiveSubcription={false}
                 />
+                <Promo />
+                <Quests points={userProgress?.points}/>
             </StickyWrapper>
             <FeedWrapper>
                 <Header title={userProgress.activeCourse.title} /> 
@@ -45,6 +50,7 @@ const LearnPage = async () => {
                     </div>
                 ))}
             </FeedWrapper>
+            <Chatbot />
         </div>
     )
 }
