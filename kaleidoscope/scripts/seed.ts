@@ -23,30 +23,105 @@ const main = async () => {
             {
                 id: 1,
                 title: "English",
-                imageSrc: "/US.svg"
+                imageSrc: "/US.svg",
             },
             {
                 id: 2,
-                title: "Croatian",
-                imageSrc: "/HR.svg"
-            }
-        ])
+                title: "Spanish",
+                imageSrc: "/ES.svg",
+            },
+        ]);
 
-        await db.insert(schema.units).values([
+        await db.insert(schema.units).values([{
+            id: 1,
+            courseId: 1,
+            title: "Unit 1",
+            description: "Learn the basics of English",
+            order: 1,
+        }]);
+
+        await db.insert(schema.lessons).values([
             {
                 id: 1,
-                courseId: 1,
-                title: "Introduction",
-                description: "Learn the basics of English",
-                order: 1
-            }
-        ])
+                unitId: 1,
+                order: 1,
+                title: "Nouns"
+            },
+            {
+                id: 2,
+                unitId: 1,
+                order: 2,
+                title: "Nouns"
+            },
+            {
+                id: 3,
+                unitId: 1,
+                order: 3,
+                title: "Verbs"
+            },
+            {
+                id: 4,
+                unitId: 1,
+                order: 4,
+                title: "Verbs"
+            },
+            {
+                id: 5,
+                unitId: 1,
+                order: 5,
+                title: "Verbs"
+            },
+        ]);
 
-        
-        console.log("Seeding complete.");
+        await db.insert(schema.challenges).values([
+            {
+                id: 1,
+                lessonId: 1,
+                type: "SELECT",
+                order: 1,
+                question: 'Tu nao trong so tu nay nghia la "dan ong"',
+            },
+            // {
+            //     id: 2,
+            //     lessonId: 2,
+            //     type: "SELECT",
+            //     order: 2,
+            //     question: 'Which one of these is the "the man"?',
+            // },
+        ]);
+
+        await db.insert(schema.challengeOptions).values([
+            {
+                id: 1,
+                challengeId: 1,
+                imageSrc: "/shop.svg",
+                correct: true,
+                text: "man",
+                audioSrc: "/us_man.mp3",
+            },
+            {
+                id: 2,
+                challengeId: 1,
+                imageSrc: "/shop.svg",
+                correct: false,
+                text: "woman",
+                audioSrc: "/us_woman.mp3",
+            },
+            {
+                id: 3,
+                challengeId: 1,
+                imageSrc: "/shop.svg",
+                correct: false,
+                text: "bisexual",
+                audioSrc: "/us_bi.mp3",
+            },
+            
+        ]);
+
+        console.log("Seeding finished");
     } catch (error) {
-        console.error(error);
-        throw new Error("Failed to seed database");
+        console.error(error)
+        throw new Error("Failed to seed db")
     }
 }
 
