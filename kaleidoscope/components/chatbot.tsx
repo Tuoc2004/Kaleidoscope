@@ -1,4 +1,5 @@
 "use client"
+import { getMessage } from '@/actions/get-message';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 
@@ -36,13 +37,17 @@ const Chatbot = () => {
 
     setUserMessage('');
 
-    // You can replace this setTimeout with your actual API call
-    setTimeout(() => {
-      setChatMessages(prevMessages => {
-        const lastMessageIndex = prevMessages.length - 1;
-        prevMessages[lastMessageIndex].content = 'Response from the API'; // Replace with actual API response
-        return [...prevMessages];
-      });
+    setTimeout(async () => {
+      try {
+        const response = await getMessage(userMessage);
+        setChatMessages(prevMessages => {
+          const lastMessageIndex = prevMessages.length - 1;
+          prevMessages[lastMessageIndex].content = response; 
+          return [...prevMessages];
+        });
+      } catch (error) {
+        console.error('Error getting message:', error);
+      }
     }, 600);
   };
 
@@ -73,16 +78,16 @@ const Chatbot = () => {
           >
             {message.type === 'outgoing' ? (
               <div className="flex items-center justify-end">                 
-                <p className="p-2 rounded-2xl bg-blue-500 text-white break-all">
+                <p className="p-2 rounded-l-lg bg-blue-500 text-white break-all">
                   {message.content}
                 </p>
               </div>
             ) : (
               <div className="flex items-center justify-start">
-                <div className="flex items-center justify-center">
-                  <Image src="chatbot.svg" alt="chatbot" width={45} height={45} />
+                <div className="flex place-items-end">
+                  <Image src="chatbot.svg" alt="chatbot" width={30} height={30} />
                 </div>
-                <p className="p-2 rounded-2xl bg-purple-500 text-white break-all">
+                <p className="p-2 rounded-full bg-purple-500 text-white break-all">
                   {message.content}
                 </p>
               </div>
@@ -91,7 +96,7 @@ const Chatbot = () => {
         ))}
         <div ref={messagesEndRef} />
       </ul>
-      <div className="flex items-center border-t border-gray-300 rounded-b-xl absolute bottom-0 left-0 right-0">
+      <div className="flex items-center border-t border-gray-300 rounded-full absolute bottom-0 left-0 right-0">
         <textarea
           className="flex-1 mr-2 resize-none border-none focus:outline-none p-1 text-left align-middle h-12"
           placeholder="Enter a message..."

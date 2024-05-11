@@ -1,5 +1,5 @@
 "use client";
-import { refillHearts } from "@/actions/user_progress";
+import { refillHearts } from "@/actions/user-progress";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import React from "react";
