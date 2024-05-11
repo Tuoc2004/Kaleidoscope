@@ -35,8 +35,8 @@ const main = async () => {
         await db.insert(schema.units).values([{
             id: 1,
             courseId: 1,
-            title: "Unit 1",
-            description: "Learn the basics of English",
+            title: "Bai 1",
+            description: "Tieng anh co ban",
             order: 1,
         }]);
 
@@ -79,43 +79,115 @@ const main = async () => {
                 lessonId: 1,
                 type: "SELECT",
                 order: 1,
-                question: 'Tu nao trong so tu nay nghia la "dan ong"',
+                question: 'Tu nao trong so tu nay nghia la "mot nguoi dan ong"?',
             },
-            // {
-            //     id: 2,
-            //     lessonId: 2,
-            //     type: "SELECT",
-            //     order: 2,
-            //     question: 'Which one of these is the "the man"?',
-            // },
+            {
+                id: 2,
+                lessonId: 1,
+                type: "ASSIST",
+                order: 2,
+                question: '"the man" nghia la gi?',
+            },
+            {
+                id: 3,
+                lessonId: 1,
+                type: "SELECT",
+                order: 2,
+                question: 'Tu nao trong so tu nay nghia la "mot nguoi phu nu"?',
+            },
         ]);
 
         await db.insert(schema.challengeOptions).values([
             {
-                id: 1,
                 challengeId: 1,
                 imageSrc: "/shop.svg",
                 correct: true,
-                text: "man",
+                text: "the man",
                 audioSrc: "/us_man.mp3",
             },
             {
-                id: 2,
                 challengeId: 1,
                 imageSrc: "/shop.svg",
                 correct: false,
-                text: "woman",
+                text: "the woman",
                 audioSrc: "/us_woman.mp3",
             },
             {
-                id: 3,
                 challengeId: 1,
                 imageSrc: "/shop.svg",
                 correct: false,
-                text: "bisexual",
+                text: "the bisexual",
                 audioSrc: "/us_bi.mp3",
             },
-            
+        ]);
+
+        await db.insert(schema.challengeOptions).values([
+            {
+                challengeId: 2,
+                correct: true,
+                text: "mot nguoi dan ong",
+                audioSrc: "/us_man.mp3",
+            },
+            {
+                challengeId: 2,
+                correct: false,
+                text: "mot nguoi phu nu",
+                audioSrc: "/us_woman.mp3",
+            },
+            {
+                challengeId: 2,
+                correct: false,
+                text: "mot nguoi be de",
+                audioSrc: "/us_bi.mp3",
+            },
+        ]);
+
+        await db.insert(schema.challengeOptions).values([
+            {
+                challengeId: 3,
+                imageSrc: "/shop.svg",
+                correct: false,
+                text: "the man",
+                audioSrc: "/us_man.mp3",
+            },
+            {
+                challengeId: 3,
+                imageSrc: "/shop.svg",
+                correct: true,
+                text: "the woman",
+                audioSrc: "/us_woman.mp3",
+            },
+            {
+                challengeId: 3,
+                imageSrc: "/shop.svg",
+                correct: false,
+                text: "the bisexual",
+                audioSrc: "/us_bi.mp3",
+            },
+        ]);
+
+        await db.insert(schema.challenges).values([
+            {
+                id: 4,
+                lessonId: 2,
+                type: "SELECT",
+                order: 1,
+                question: 'Tu nao trong so tu nay nghia la "mot nguoi dan ong"?',
+            },
+            {
+                id: 5,
+                lessonId: 2,
+                type: "ASSIST",
+                order: 2,
+                question: '"the man" nghia la gi?',
+            },
+            {
+                id: 6,
+                lessonId: 2,
+                type: "SELECT",
+                order: 2,
+                question: 'Tu nao trong so tu nay nghia la "mot nguoi phu nu"?',
+            },
         ]);
 
         console.log("Seeding finished");
