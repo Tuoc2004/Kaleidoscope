@@ -6,7 +6,7 @@ import { useAudio, useKey } from "react-use";
 import { challenges } from "@/db/schema";
 import { cn } from "@/lib/utils";
 
-type CardProps = {
+type Props = {
   id: number;
   text: string;
   imageSrc: string | null;
@@ -29,13 +29,13 @@ export const Card = ({
   status,
   disabled,
   type,
-}: CardProps) => {
+}: Props) => {
   const [audio, _, controls] = useAudio({ src: audioSrc || "" });
 
   const handleClick = useCallback(() => {
     if (disabled) return;
 
-    void controls.play();
+    controls.play();
     onClick();
   }, [disabled, onClick, controls]);
 

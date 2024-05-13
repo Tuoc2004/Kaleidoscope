@@ -4,13 +4,13 @@ import { getLesson, getUserProgress, getUserSubscription } from "@/db/queries";
 
 import { Quiz } from "../quiz";
 
-type LessonIdPageProps = {
+type Props = {
   params: {
     lessonId: number;
   };
 };
 
-const LessonIdPage = async ({ params }: LessonIdPageProps) => {
+const LessonIdPage = async ({ params }: Props) => {
   const lessonData = getLesson(params.lessonId);
   const userProgressData = getUserProgress();
   const userSubscriptionData = getUserSubscription();
@@ -21,11 +21,12 @@ const LessonIdPage = async ({ params }: LessonIdPageProps) => {
     userSubscriptionData,
   ]);
 
-  if (!lesson || !userProgress) return redirect("/learn");
+  if (!lesson || !userProgress) 
+    redirect("/learn");
 
   const initialPercentage =
-    (lesson.challenges.filter((challenge) => challenge.completed).length /
-      lesson.challenges.length) *
+    lesson.challenges.filter((challenge) => challenge.completed).length /
+      lesson.challenges.length *
     100;
 
   return (
