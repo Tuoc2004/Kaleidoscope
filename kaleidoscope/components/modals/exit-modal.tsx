@@ -26,16 +26,16 @@ export const ExitModal = () => {
                         <Image src="/sad.svg" alt="Sad" height={80} width={80} />
                     </div>
                     <DialogTitle className="text-center font-bold text-2xl">
-                        Wait!!
+                        Khoan đã!!
                     </DialogTitle>
                     <DialogDescription className="text-center text-base">
-                        Are you sure you want to leave the lesson?
+                        Bạn chắc chắn muốn rời bài học này chứ?
                     </DialogDescription>
                 </DialogHeader>
                 <DialogFooter className="mb-4">
                     <div className="flex flex-col gap-y-4 w-full">
                         <Button variant="primary" className="w-full" size="lg" onClick={close}>
-                            Keep learning
+                            Học tiếp
                         </Button>
                         <Button
                             variant="dangerOutline"
@@ -45,7 +45,7 @@ export const ExitModal = () => {
                                 close();
                                 router.push("/learn")
                             }}>
-                            Out of here
+                            Thoát
                         </Button>
                     </div>
                 </DialogFooter>

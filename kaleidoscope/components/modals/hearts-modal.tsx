@@ -27,13 +27,13 @@ export const HeartsModal = () => {
             <DialogContent className="max-w-md">
                 <DialogHeader>
                     <div className="flex items-center w-full justify-center mb-5">
-                        <Image src="/bad.svg" alt="Bad" height={80} width={80} />
+                        <Image src="/dizzy.svg" alt="Dizzy" height={80} width={80} />
                     </div>
                     <DialogTitle className="text-center font-bold text-2xl">
-                        Het tim roi!
+                        Hết tim rồi!!
                     </DialogTitle>
                     <DialogDescription className="text-center text-base">
-                        Nap tien hoac mua them trong cua hang
+                        Mua thêm trong của hàng
                     </DialogDescription>
                 </DialogHeader>
                 <DialogFooter className="mb-4">
@@ -43,7 +43,7 @@ export const HeartsModal = () => {
                             className="w-full"
                             size="lg"
                             onClick={onClick}>
-                            Mua them tim
+                            Mua thêm tim
                         </Button>
                         <Button
                             variant="primaryOutline"
@@ -51,7 +51,7 @@ export const HeartsModal = () => {
                             size="lg"
                             onClick={close}
                         >
-                            Khong can
+                            Không cần
                         </Button>
                     </div>
                 </DialogFooter>
