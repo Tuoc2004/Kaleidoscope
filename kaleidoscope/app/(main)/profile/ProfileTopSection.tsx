@@ -7,9 +7,11 @@ import {
   ProfileTimeJoinedSvg,
   EditPencilSvg,
 } from "@/components/svgs";
+import Image from "next/image";
 
 const ProfileTopSection = async () => {
   const userProgressData = await getUserProgress();
+  const userImageSrc = userProgressData?.userImageSrc;
 
   if (!userProgressData || !userProgressData.activeCourse) {
     redirect("/");
@@ -24,10 +26,15 @@ const ProfileTopSection = async () => {
   return (
     <section className="flex flex-row-reverse border-b-2 border-gray-200 pb-8 md:flex-row md:gap-8">
       <div
-        className="flex h-20 w-20 items-center justify-center rounded-full border-2 border-dashed
-        border-gray-400 text-3xl font-bold text-gray-400 md:h-44 md:w-44 md:text-7xl"
+        className="relative items-center justify-center h-20 w-20 md:h-44 md:w-44"
       >
-        {username.charAt(0).toUpperCase()}
+        <Image 
+          src={userImageSrc || "/quests.svg"} 
+          alt="Avatar" 
+          width={176} 
+          height={176} 
+          className="rounded-full border-2 border-gray-400 object-cover" 
+        />
       </div>
 
       <div className="flex grow flex-col justify-between gap-3">
