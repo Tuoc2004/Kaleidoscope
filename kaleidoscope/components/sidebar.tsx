@@ -3,11 +3,16 @@ import Link from "next/link";
 import { SidebarItem } from "./sidebar_item";
 import { ClerkLoading, ClerkLoaded, UserButton } from "@clerk/nextjs";
 import { Loader } from "lucide-react";
+import { getUserProgress } from "@/db/queries";
 
 type Props = {
     className?: string;
 };
-export const Sidebar = ({ className }: Props) => {
+export const Sidebar = async ({ className }: Props) => {
+
+    const userProgress = await getUserProgress();
+    const userImageSrc = userProgress?.userImageSrc;
+
     return (
         <div className={cn(
             "flex bg-white-500 h-full lg:w-[256px] lg:fixed left-0 top-0 px-4 border-r-2 flex-col",
@@ -25,6 +30,7 @@ export const Sidebar = ({ className }: Props) => {
                 <SidebarItem label="Leaderboard" iconSrc="leaderboard.svg" href="/leaderboard"/>
                 <SidebarItem label="Quests" iconSrc="quests.svg" href="/quests"/>
                 <SidebarItem label="Shop" iconSrc="shop.svg" href="/shopItem"/>
+                <SidebarItem label="Profile" iconSrc={ userImageSrc || "setting.svg"} href="/profile"/>
                 <SidebarItem label="Settings" iconSrc="setting.svg" href="/setting"/>
             </div>
             <div className="p-4">
