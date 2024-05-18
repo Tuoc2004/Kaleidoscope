@@ -1,4 +1,3 @@
-// import Image from "next/image";
 import {Button} from "@/components/ui/button"
 import { ClerkLoading, ClerkLoaded, SignedOut, SignedIn, SignUpButton, SignInButton } from "@clerk/nextjs"
 import { Loader } from "lucide-react"

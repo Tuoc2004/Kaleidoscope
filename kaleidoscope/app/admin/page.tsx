@@ -1,19 +1,20 @@
 import dynamic from "next/dynamic";
-
-import App from "./app";
-import { isAdmin } from "@/lib/admin";
 import { redirect } from "next/navigation";
 
-// const Application = dynamic(() => import("./app"), { ssr: false });
+import { isAdmin } from "@/lib/admin";
+
+const App = dynamic(() => import("./app"), { ssr: false });
 
 const AdminPage = () => {
-  if (!isAdmin()) {
-    redirect("/");
-  }
+  const is_admin = isAdmin();
+
+  if (!is_admin) redirect("/");
 
   return (
-    <App />
+    <div>
+      <App />
+    </div>
   );
-}
+};
 
 export default AdminPage;

@@ -1,13 +1,13 @@
 import { getUserProgress } from "@/db/queries";
-import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Card } from "@/components/card";
 import {
   ProfileFriendsSvg,
   ProfileTimeJoinedSvg,
-  EditPencilSvg,
 } from "@/components/svgs";
 import Image from "next/image";
+import { currentUser } from "@clerk/nextjs";
+import { format } from "date-fns"; 
 
 const ProfileTopSection = async () => {
   const userProgressData = await getUserProgress();
@@ -17,17 +17,17 @@ const ProfileTopSection = async () => {
     redirect("/");
   }
 
-  const name = userProgressData.userName || "Default Name";
-  const username = "username";
-  const joinedAt = "2021-10-10";
+  // Fetch current user data from Clerk
+  const user = await currentUser();
+  const name = userProgressData.userName || user?.firstName || "Default Name";
+  const username = user?.username || "username";
+  const joinedAt = user?.createdAt ? format(new Date(user.createdAt), "yyyy-MM-dd") : "Unknown date";
   const followingCount = 0;
   const followersCount = 0;
 
   return (
     <section className="flex flex-row-reverse border-b-2 border-gray-200 pb-8 md:flex-row md:gap-8">
-      <div
-        className="relative items-center justify-center h-20 w-20 md:h-44 md:w-44"
-      >
+      <div className="relative items-center justify-center h-20 w-20 md:h-44 md:w-44">
         <Image 
           src={userImageSrc || "/quests.svg"} 
           alt="Avatar" 
@@ -54,13 +54,6 @@ const ProfileTopSection = async () => {
         </div>
         <Card activeCourse={userProgressData.activeCourse} />
       </div>
-      <Link
-        href="/profile"
-        className="hidden items-center gap-2 self-start rounded-2xl border-b-4 border-blue-500 bg-blue-400 px-5 py-3 font-bold uppercase text-white transition hover:brightness-110 md:flex"
-      >
-        <EditPencilSvg />
-        Edit profile
-      </Link>
     </section>
   );
 };

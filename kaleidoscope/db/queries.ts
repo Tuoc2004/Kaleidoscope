@@ -1,11 +1,12 @@
 import { cache } from "react";
 
 import { auth } from "@clerk/nextjs";
-import { eq } from "drizzle-orm";
+import { and, eq, sql } from "drizzle-orm";
 
 import db from "./drizzle";
 import {
   challengeProgress,
+  challenges,
   courses,
   lessons,
   units,
@@ -243,4 +244,30 @@ export const getTopTenUsers = cache(async () => {
   });
 
   return data;
+});
+
+export const getFinishedCoursesCount = cache(async () => {
+  const { userId } = auth();
+
+  if (!userId) return 0;
+
+  const finishedCourses = await db
+    .select({
+      courseId: courses.id,
+    })
+    .from(courses)
+    .innerJoin(units, eq(units.courseId, courses.id))
+    .innerJoin(lessons, eq(lessons.unitId, units.id))
+    .innerJoin(challenges, eq(challenges.lessonId, lessons.id))
+    .leftJoin(
+      challengeProgress,
+      and(eq(challengeProgress.challengeId, challenges.id), eq(challengeProgress.userId, userId))
+    )
+    .groupBy(courses.id)
+    .having(sql`COUNT(${challenges.id}) = COUNT(${challengeProgress.id})`)
+    .execute();
+
+  const finishedCoursesCount = finishedCourses.length;
+
+  return finishedCoursesCount;
 });
