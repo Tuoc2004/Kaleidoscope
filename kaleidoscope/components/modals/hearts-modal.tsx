@@ -16,7 +16,7 @@ export const HeartsModal = () => {
 
     const onClick = () => {
         close();
-        router.push("/store")
+        router.push("/shopItem")
     }
     if (!isClient) {
         return null;
@@ -30,10 +30,10 @@ export const HeartsModal = () => {
                         <Image src="/dizzy.svg" alt="Dizzy" height={80} width={80} />
                     </div>
                     <DialogTitle className="text-center font-bold text-2xl">
-                        Hết tim rồi!!
+                        Hết tim mất rồi!!
                     </DialogTitle>
                     <DialogDescription className="text-center text-base">
-                        Mua thêm trong của hàng
+                        Hãy mua thêm trong của hàng
                     </DialogDescription>
                 </DialogHeader>
                 <DialogFooter className="mb-4">

@@ -9,7 +9,7 @@ type Props = {
 };
 
 export const ResultCard = ({ value, variant }: Props) => {
-  const imageSrc = variant === "points" ? "/points.svg" : "/heart.svg";
+  const imageSrc = variant === "points" ? "/point.svg" : "/heart.svg";
 
   return (
     <div

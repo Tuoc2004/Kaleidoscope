@@ -180,7 +180,7 @@ export const Quiz = ({
           />
 
           <h1 className="text-lg font-bold text-neutral-700 lg:text-3xl">
-            Lam tot lam! <br /> Ban da hoan thanh bai nay
+            Làm tốt lắm! <br /> Bạn đã hoàn thành bài tập này
           </h1>
 
           <div className="flex w-full items-center gap-x-4">

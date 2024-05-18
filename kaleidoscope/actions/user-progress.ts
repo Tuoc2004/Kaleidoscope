@@ -94,7 +94,7 @@ export const reduceHearts = async (challengeId: number) => {
     })
     .where(eq(userProgress.userId, userId));
 
-  revalidatePath("/shop");
+  revalidatePath("/shopItem");
   revalidatePath("/learn");
   revalidatePath("/quests");
   revalidatePath("/leaderboard");
@@ -118,7 +118,7 @@ export const refillHearts = async () => {
     })
     .where(eq(userProgress.userId, currentUserProgress.userId));
 
-  revalidatePath("/shop");
+  revalidatePath("/shopItem");
   revalidatePath("/learn");
   revalidatePath("/quests");
   revalidatePath("/leaderboard");
@@ -144,7 +144,7 @@ export const updateUserStreak = async () => {
     streak: daysDifference > 1 ? 0 : currentUserProgress.streak + 1, 
   }).where(eq(userProgress.userId, currentUserProgress.userId));
 
-  revalidatePath("/shop");
+  revalidatePath("/shopItem");
   revalidatePath("/learn");
   revalidatePath("/quests");
   revalidatePath("/leaderboard");
