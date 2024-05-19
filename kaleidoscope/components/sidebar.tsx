@@ -14,12 +14,12 @@ export const Sidebar = async ({ className }: Props) => {
 
     return (
         <div className={cn(
-            "flex bg-white-500 h-full lg:w-[300px] lg:fixed left-0 top-0 px-4 border-r-2 flex-col",
+            "flex bg-white-500 h-full lg:w-[256px] lg:fixed left-0 top-0 px-4 border-r-2 flex-col",
             className,
             )}>
             <Link href="/learn">
                 <div className="pt-8 pl-4 pb-7 flex items-center gap-x-3">
-                    <Image src="logo.svg" alt="logo" height={60} width={60} className="pt-4 pb-3" />
+                    <Image src="logo.svg" alt="logo" height={45} width={45} className="pt-4 pb-3" />
                     <h1 className="text-2xl font-extrabold text-green-500 tracking-wide">
                         Kaleidoscope
                     </h1>
