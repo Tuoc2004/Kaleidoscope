@@ -2,15 +2,13 @@
 
 import Image from "next/image";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogFooter, DialogTitle } from "@/components/ui/dialog";
-import { useExitModal } from "@/store/use-exit-modal";
-import { useRouter } from "next/navigation";
+import { usePracticeModal } from "@/store/use-practice-modal";
 import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 
-export const ExitModal = () => {
-    const router = useRouter();
+export const PracticeModal = () => {
     const [isClient, setIsClient] = useState(false);
-    const { isOpen, close } = useExitModal();
+    const { isOpen, close } = usePracticeModal();
 
     useEffect(() => setIsClient(true), []);
 
@@ -23,29 +21,24 @@ export const ExitModal = () => {
             <DialogContent className="max-w-md">
                 <DialogHeader>
                     <div className="flex items-center w-full justify-center mb-5">
-                        <Image src="/sad.svg" alt="Sad" height={80} width={80} />
+                        <Image src="/heart.svg" alt="Heart" height={100} width={100} />
                     </div>
                     <DialogTitle className="text-center font-bold text-2xl">
-                        Khoan đã!!
+                        Lam lai
                     </DialogTitle>
                     <DialogDescription className="text-center text-base">
-                        Bạn chắc chắn muốn rời bài học này chứ?
+                        Lam lai se co the co them tim va diem. Tim va diem se khong bi mat trong qua trinh lam lai.
                     </DialogDescription>
                 </DialogHeader>
                 <DialogFooter className="mb-4">
                     <div className="flex flex-col gap-y-4 w-full">
-                        <Button variant="primary" className="w-full" size="lg" onClick={close}>
-                            Học tiếp
-                        </Button>
                         <Button
-                            variant="dangerOutline"
+                            variant="primary"
                             className="w-full"
                             size="lg"
-                            onClick={() => {
-                                close();
-                                router.push("/learn")
-                            }}>
-                            Thoát
+                            onClick={close}
+                        >
+                            Hieu roi
                         </Button>
                     </div>
                 </DialogFooter>

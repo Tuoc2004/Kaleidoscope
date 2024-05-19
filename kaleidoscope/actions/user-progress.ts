@@ -4,6 +4,7 @@ import { auth, currentUser } from "@clerk/nextjs";
 import { and, eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { differenceInDays} from "date-fns";
 
 import { MAX_HEARTS, POINTS_TO_REFILL } from "../constants";
 import db from "@/db/drizzle";
@@ -15,7 +16,7 @@ import {
 import { challengeProgress, challenges, userProgress } from "@/db/schema";
 
 export const upsertUserProgress = async (courseId: number) => {
-  const { userId } = auth();
+  const { userId } = await auth();
   const user = await currentUser();
 
   if (!userId || !user) throw new Error("Unauthorized.");
@@ -54,7 +55,7 @@ export const upsertUserProgress = async (courseId: number) => {
 };
 
 export const reduceHearts = async (challengeId: number) => {
-  const { userId } = auth();
+  const { userId } = await auth();
 
   if (!userId) throw new Error("Unauthorized.");
 
@@ -116,6 +117,32 @@ export const refillHearts = async () => {
       points: currentUserProgress.points - POINTS_TO_REFILL,
     })
     .where(eq(userProgress.userId, currentUserProgress.userId));
+
+  revalidatePath("/shop");
+  revalidatePath("/learn");
+  revalidatePath("/quests");
+  revalidatePath("/leaderboard");
+};
+
+export const updateUserStreak = async () => {
+  const { userId } = await auth();
+  const user = await currentUser();
+
+  if (!userId || !user) throw new Error("Unauthorized.");
+  const currentUserProgress = await getUserProgress();
+
+  if (!currentUserProgress) throw new Error("User progress not found.");
+  const lastSignInTime = user?.lastSignInAt;
+
+  if (!lastSignInTime) return; 
+  const today = new Date();
+  const lastSignInDate = new Date(lastSignInTime);
+  const daysDifference = differenceInDays(today, lastSignInDate);
+
+  // Update streak in the database
+  await db.update(userProgress).set({
+    streak: daysDifference > 1 ? 0 : currentUserProgress.streak + 1, 
+  }).where(eq(userProgress.userId, currentUserProgress.userId));
 
   revalidatePath("/shop");
   revalidatePath("/learn");

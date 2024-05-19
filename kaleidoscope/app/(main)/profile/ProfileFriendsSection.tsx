@@ -34,8 +34,8 @@ const ProfileFriendsSection = () => {
         </div>
         <div className="flex items-center justify-center py-10 text-center text-gray-500">
           {state === "FOLLOWING"
-            ? "Not following anyone yet"
-            : "No followers yet"}
+            ? "In during development..."
+            : "In during development..."}
         </div>
       </div>
     </section>

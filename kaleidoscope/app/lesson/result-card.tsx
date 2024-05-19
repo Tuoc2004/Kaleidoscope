@@ -3,12 +3,12 @@ import Image from "next/image";
 
 import { cn } from "@/lib/utils";
 
-type ResultCardProps = {
+type Props = {
   value: number;
   variant: "points" | "hearts";
 };
 
-export const ResultCard = ({ value, variant }: ResultCardProps) => {
+export const ResultCard = ({ value, variant }: Props) => {
   const imageSrc = variant === "points" ? "/points.svg" : "/heart.svg";
 
   return (

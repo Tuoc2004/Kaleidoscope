@@ -6,12 +6,14 @@ import {
     LightningProgressSvg 
 } from "@/components/svgs";
 
-const ProfileStatsSection = () => {
-    const streak = 0;
-    const totalXp = 0;
-    const league = "Bronze";
-    const top3Finishes = 0;
+type Props = {
+    streak : number;
+    totalXp : number;
+    league : string;
+    coursesFinished : number;
+}
 
+const ProfileStatsSection = async( { streak, totalXp, league, coursesFinished }: Props) => {
     return (
         <section>
         <h2 className="mb-5 text-2xl font-bold">Statistics</h2>
@@ -51,18 +53,18 @@ const ProfileStatsSection = () => {
             </div>
             </div>
             <div className="flex gap-2 rounded-2xl border-2 border-gray-200 p-2 md:gap-3 md:px-6 md:py-4">
-            {top3Finishes === 0 ? <EmptyMedalSvg /> : <EmptyMedalSvg />}
+            {coursesFinished === 0 ? <EmptyMedalSvg /> : <EmptyMedalSvg />}
             <div className="flex flex-col">
                 <span
                 className={[
                     "text-xl font-bold",
-                    top3Finishes === 0 ? "text-gray-400" : "",
+                    coursesFinished === 0 ? "text-gray-400" : "",
                 ].join(" ")}
                 >
-                {top3Finishes}
+                {coursesFinished}
                 </span>
                 <span className="text-sm text-gray-400 md:text-base">
-                Top 3 finishes
+                Completed courses
                 </span>
             </div>
             </div>
@@ -70,5 +72,6 @@ const ProfileStatsSection = () => {
         </section>
     );
 };
+
 
 export default ProfileStatsSection;

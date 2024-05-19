@@ -21,7 +21,7 @@ import { Header } from "./header";
 import { QuestionBubble } from "./question-bubble";
 import { ResultCard } from "./result-card";
 
-type QuizProps = {
+type Props = {
   initialPercentage: number;
   initialHearts: number;
   initialLessonId: number;
@@ -30,10 +30,10 @@ type QuizProps = {
     challengeOptions: (typeof challengeOptions.$inferSelect)[];
   })[];
   userSubscription:
-    | (typeof userSubscription.$inferSelect & {
-        isActive: boolean;
-      })
-    | null;
+  | (typeof userSubscription.$inferSelect & {
+    isActive: boolean;
+  })
+  | null;
 };
 
 export const Quiz = ({
@@ -42,7 +42,7 @@ export const Quiz = ({
   initialLessonId,
   initialLessonChallenges,
   userSubscription,
-}: QuizProps) => {
+}: Props) => {
   const [correctAudio, _c, correctControls] = useAudio({ src: "/correct.wav" });
   const [incorrectAudio, _i, incorrectControls] = useAudio({
     src: "/incorrect.wav",
@@ -121,7 +121,7 @@ export const Quiz = ({
               return;
             }
 
-            void correctControls.play();
+            correctControls.play();
             setStatus("correct");
             setPercentage((prev) => prev + 100 / challenges.length);
 
@@ -141,7 +141,7 @@ export const Quiz = ({
               return;
             }
 
-            void incorrectControls.play();
+            incorrectControls.play();
             setStatus("wrong");
 
             if (!response?.error) setHearts((prev) => Math.max(prev - 1, 0));
@@ -158,7 +158,7 @@ export const Quiz = ({
         <Confetti
           recycle={false}
           numberOfPieces={500}
-          tweenDuration={10_000}
+          tweenDuration={10000}
           width={width}
           height={height}
         />
@@ -175,12 +175,12 @@ export const Quiz = ({
             src="/finish.svg"
             alt="Finish"
             className="block lg:hidden"
-            height={100}
-            width={100}
+            height={50}
+            width={50}
           />
 
           <h1 className="text-lg font-bold text-neutral-700 lg:text-3xl">
-            Great job! <br /> You&apos;ve completed the lesson.
+            Lam tot lam! <br /> Ban da hoan thanh bai nay
           </h1>
 
           <div className="flex w-full items-center gap-x-4">
@@ -203,7 +203,7 @@ export const Quiz = ({
 
   const title =
     challenge.type === "ASSIST"
-      ? "Select the correct meaning"
+      ? "Chọn nghĩa đúng"
       : challenge.question;
 
   return (

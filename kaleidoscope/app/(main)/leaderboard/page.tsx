@@ -7,6 +7,7 @@ import { redirect } from 'next/navigation'
 import Image from 'next/image'
 import { Separator } from '@/components/ui/separator'
 import { Avatar, AvatarImage } from '@/components/ui/avatar'
+import { Promo } from '@/components/promo'
 
 const LeaderBoardPage = async () => {
     const userProgressData = getUserProgress();
@@ -29,8 +30,10 @@ const LeaderBoardPage = async () => {
             activeCourse={userProgress.activeCourse}
             hearts={userProgress?.hearts}
             points={userProgress?.points}
+            streak={userProgress?.streak}
             hasActiveSubcription={false}
             />
+            <Promo />
         </StickyWrapper>
         <FeedWrapper>
             <div className='w-full flex flex-col items-center'>

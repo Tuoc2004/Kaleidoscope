@@ -2,18 +2,22 @@
 
 import Image from "next/image";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogFooter, DialogTitle } from "@/components/ui/dialog";
-import { useExitModal } from "@/store/use-exit-modal";
+import { useHeartsModal } from "@/store/use-hearts-modal";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 
-export const ExitModal = () => {
+export const HeartsModal = () => {
     const router = useRouter();
     const [isClient, setIsClient] = useState(false);
-    const { isOpen, close } = useExitModal();
+    const { isOpen, close } = useHeartsModal();
 
     useEffect(() => setIsClient(true), []);
 
+    const onClick = () => {
+        close();
+        router.push("/store")
+    }
     if (!isClient) {
         return null;
     }
@@ -23,29 +27,31 @@ export const ExitModal = () => {
             <DialogContent className="max-w-md">
                 <DialogHeader>
                     <div className="flex items-center w-full justify-center mb-5">
-                        <Image src="/sad.svg" alt="Sad" height={80} width={80} />
+                        <Image src="/dizzy.svg" alt="Dizzy" height={80} width={80} />
                     </div>
                     <DialogTitle className="text-center font-bold text-2xl">
-                        Khoan đã!!
+                        Hết tim rồi!!
                     </DialogTitle>
                     <DialogDescription className="text-center text-base">
-                        Bạn chắc chắn muốn rời bài học này chứ?
+                        Mua thêm trong của hàng
                     </DialogDescription>
                 </DialogHeader>
                 <DialogFooter className="mb-4">
                     <div className="flex flex-col gap-y-4 w-full">
-                        <Button variant="primary" className="w-full" size="lg" onClick={close}>
-                            Học tiếp
-                        </Button>
                         <Button
-                            variant="dangerOutline"
+                            variant="primary"
                             className="w-full"
                             size="lg"
-                            onClick={() => {
-                                close();
-                                router.push("/learn")
-                            }}>
-                            Thoát
+                            onClick={onClick}>
+                            Mua thêm tim
+                        </Button>
+                        <Button
+                            variant="primaryOutline"
+                            className="w-full"
+                            size="lg"
+                            onClick={close}
+                        >
+                            Không cần
                         </Button>
                     </div>
                 </DialogFooter>

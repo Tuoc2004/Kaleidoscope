@@ -6,6 +6,7 @@ import { getUserProgress } from '@/db/queries'
 import { redirect } from 'next/navigation'
 import Image from 'next/image'
 import { Items } from './items'
+import { Promo } from '@/components/promo'
 
 const ShopItem = async () => {
   const userProgressData = getUserProgress();
@@ -27,7 +28,9 @@ const ShopItem = async () => {
           hearts={userProgress?.hearts}
           points={userProgress?.points}
           hasActiveSubcription={false}
+          streak={userProgress?.streak}
         />
+        <Promo />
       </StickyWrapper>
       <FeedWrapper>
         <div className='w-full flex flex-col items-center'>
