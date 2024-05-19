@@ -32,6 +32,42 @@ Trong dự án sử dụng những công nghệ như Next.js 14, Elevenlabs AI, 
 
 Kaleidoscope là ứng dụng học ngôn ngữ độc đáo, lấy cảm hứng từ Duolingo, mang đến trải nghiệm đa chiều giống như việc nhìn qua một kính vạn hoa. Với sự đa dạng và sáng tạo, người dùng khám phá ngôn ngữ và văn hóa một cách phong phú thông qua các hoạt động tương tác và kết nối cộng đồng.
 
+## Personas
+Persona 1:
+
+**Tên**: Nguyễn Anh Tuấn
+
+**Tuổi**: 16
+
+**Nghề nghiệp**: Học sinh trung học phổ thông
+
+**Mục tiêu**:
+- Nâng cao kỹ năng tiếng Anh để chuẩn bị cho kỳ thi đại học.
+- Cải thiện khả năng giao tiếp tiếng Anh để có thể du học trong tương lai.
+- Học tiếng Anh một cách vui vẻ và không nhàm chán.
+
+**Đặc điểm**:
+- Trình độ tiếng Anh: Trung bình, đã học qua các kiến thức cơ bản nhưng cần rèn luyện nhiều hơn về kỹ năng nghe và nói.
+- Công nghệ: Rất thành thạo việc sử dụng điện thoại thông minh và máy tính bảng, thường xuyên sử dụng các ứng dụng học tập và mạng xã hội.
+- Sở thích: Yêu thích các trò chơi điện tử, âm nhạc, và thích xem các video học tập trên YouTube.
+- Thói quen học tập: Thường xuyên học vào buổi tối sau giờ học chính khóa, thích học theo cách tự do và thoải mái.
+
+**Nhu cầu**:
+- Ứng dụng cần có tính tương tác cao và tạo động lực học tập qua các thử thách, điểm thưởng.
+- Nội dung học phong phú, bao gồm các bài học từ vựng, ngữ pháp, và thực hành kỹ năng nghe, nói.
+- Có thể học offline khi không có kết nối Internet.
+- Cần được nhắc nhở và theo dõi tiến độ học tập để duy trì động lực.
+
+## User Stories
+
+**User Story 1**: Tính năng học từ vựng
+
+- Là một học sinh trung học phổ thông, tôi muốn có các bài học từ vựng phong phú với hình ảnh minh họa và âm thanh phát âm để tôi có thể ghi nhớ từ vựng một cách dễ dàng và hiệu quả hơn
+
+**User Story 2**: Theo dõi tiến độ
+
+- Là một học sinh trung học, tôi muốn xem được tiến độ học tập của mình qua các biểu đồ và số liệu để tôi có thể biết được mình đang tiến bộ như thế nào và cần cải thiện ở đâu
+
 ## Install
 
 1. Clone the Repository:
@@ -56,25 +92,27 @@ NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_key
 CLERK_SECRET_KEY=your_clerk_secret_key
 DATABASE_URL=your_postgres_connection_string
 API_KEY=your_gemini_api_key # Optional
-ADMIN_KEY=your_admin_key
+ADMIN_KEY=your_admin_key # Optional
 ```
 
 4. Setup Clerk Authentication
 
 - Follow Clerk's documentation to create a project and obtain your keys (https://clerk.com/docs/quickstarts/setup-clerk).
-- Replace the placeholder values in .env with your actual keys.
+- Update `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`, `CLERK_SECRET_KEY` and `ADMIN_KEY`  in `.env` file with your actual keys.
 
 5. Configure Neon and Postgres
 
 - Refer to Neon's documentation (https://neon.tech/) for setting up a serverless Postgres instance using Neon.
-- Update the `DATABASE_URL` environment variable with your Postgres connection string.
+- Update the `DATABASE_URL` in `.env` with your Postgres connection string.
+
+6. Setup Gemini API key
+- Update `API_KEY` in `.env` file with your Gemini API key.
 
 ## Usage
 
 1. Run these commands in sequence to set up the database:
 
 ```bash
-npm run db:reset
 npm run db:push
 npm run db:prod
 ```
@@ -95,6 +133,14 @@ Hãy đảm bảo cập nhật các bài kiểm tra khi thích hợp.
 
 ### 🌟Contributors
 [![langchain contributors](https://contrib.rocks/image?repo=Tuoc2004/Kaleidoscope&max=2000)](https://github.com/Tuoc2004/Kaleidoscope/graphs/contributors)
+
+- 22022608 - Nguyen Duc Tuoc - Tuoc2004, NguyenTuoc2807
+- 22022541 - Nguyen Tien Trung - CarolFiuf
+- 22022530 - Nguyen Nhat Tan - nwdy
+
+## Report
+Demo video and report: [click here](https://drive.google.com/drive/u/0/folders/1bpaCn2zjNh6H2AxyxwMLW4KMnf2f2lax)
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
