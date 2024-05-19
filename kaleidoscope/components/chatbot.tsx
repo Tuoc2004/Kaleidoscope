@@ -78,7 +78,7 @@ const Chatbot = () => {
           >
             {message.type === 'outgoing' ? (
               <div className="flex items-center justify-end">                 
-                <p className="p-2 rounded-l-lg bg-blue-500 text-white break-all">
+                <p className="p-2 rounded-full bg-blue-500 text-white break-all">
                   {message.content}
                 </p>
               </div>

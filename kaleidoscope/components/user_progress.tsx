@@ -1,3 +1,4 @@
+"use client"
 import Link from "next/link"
 import { Button } from "./ui/button"
 import { InfinityIcon } from "lucide-react"
@@ -5,6 +6,8 @@ import Image from "next/image"
 import { courses } from "@/db/schema"
 import { ClerkLoading, ClerkLoaded, UserButton } from "@clerk/nextjs";
 import { Loader } from "lucide-react";
+import { updateUserStreak } from "@/actions/user-progress"
+import { useEffect } from "react"
 
 type Props = {
     activeCourse: typeof courses.$inferSelect;
@@ -15,6 +18,23 @@ type Props = {
 }
 
 export const UserProgress = ({ activeCourse, hearts, points,streak, hasActiveSubcription }: Props) => {
+    useEffect(() => {
+        const updateStreakOncePerDay = async () => {
+          try {
+            const lastUpdate = localStorage.getItem('lastUpdate');
+            const today = new Date().toISOString().split('T')[0]; 
+    
+            if (lastUpdate !== today) {
+              await updateUserStreak();
+              localStorage.setItem('lastUpdate', today);
+            }
+          } catch (error) {
+            console.error("Failed to update user streak:", error);
+          }
+        };
+    
+        updateStreakOncePerDay();
+      }, []);
     return (
         <div className="flex items-center justify-between gap-x-2">
             <Link href="/courses">
