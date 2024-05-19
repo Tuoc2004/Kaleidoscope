@@ -34,7 +34,58 @@ Kaleidoscope là ứng dụng học ngôn ngữ độc đáo, lấy cảm hứng
 
 ## Install
 
+1. Clone the Repository:
+
+```bash
+git clone https://github.com/Tuoc2004/Kaleidoscope
+```
+
+2. Install Dependencies:
+
+```bash
+cd Kaleidoscope/kaleidoscope
+npm install
+```
+
+3. Create a .env File:
+
+- Fill in the following environment variables with your own values:
+
+```bash
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_key
+CLERK_SECRET_KEY=your_clerk_secret_key
+DATABASE_URL=your_postgres_connection_string
+API_KEY=your_gemini_api_key # Optional
+ADMIN_KEY=your_admin_key
+```
+
+4. Setup Clerk Authentication
+
+- Follow Clerk's documentation to create a project and obtain your keys (https://clerk.com/docs/quickstarts/setup-clerk).
+- Replace the placeholder values in .env with your actual keys.
+
+5. Configure Neon and Postgres
+
+- Refer to Neon's documentation (https://neon.tech/) for setting up a serverless Postgres instance using Neon.
+- Update the `DATABASE_URL` environment variable with your Postgres connection string.
+
 ## Usage
+
+1. Run these commands in sequence to set up the database:
+
+```bash
+npm run db:reset
+npm run db:push
+npm run db:prod
+```
+
+2. Start the server:
+
+```bash
+npm run dev
+```
+
+3. Open the link: [`localhost:3000/`](http://localhost:3000/)
 
 ## 💁Contributing
 
